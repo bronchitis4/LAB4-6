@@ -5,7 +5,16 @@ import java.util.*;
 
 public class ListOfCommands
 {
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = null;
+    public ListOfCommands() {
+        this.sc = new Scanner(System.in);
+    }
+
+    // Конструктор для тестування
+    public ListOfCommands(Scanner sc) {
+        this.sc = sc;
+    }
+
 
     public List<Vehicle> createListOfCars() {
         List<Vehicle> cars = new ArrayList<>();
@@ -53,7 +62,6 @@ public class ListOfCommands
 
 
     public void addVehicle(List<Vehicle> cars) {
-        sc.nextLine();
         System.out.println("\nADD CAR");
 
         System.out.print("Enter brand:");
@@ -88,7 +96,6 @@ public class ListOfCommands
     }
 
     public void deleteVehicle(List<Vehicle> cars) {
-        sc.nextLine();
         System.out.println("\nDELETE CAR");
 
         if (cars == null || cars.isEmpty()) {
@@ -107,24 +114,19 @@ public class ListOfCommands
             System.out.println("No vehicle found with VinCode " + vinCode + ".");
         }
     }
-
-    public void calculatePrice(List<Vehicle> cars) {
-        sc.nextLine();
-        System.out.println("\nCALCULATE PRICE");
-
-        if (cars == null || cars.isEmpty()) {
-            System.out.println("The list of vehicles is empty.");
-            return;
-        }
+    public double calculatePrice(List<Vehicle> cars) {
         double totalPriceOfAllVehicles = 0;
 
+        // Проходимо по всіх автомобілях і підсумовуємо їхні ціни
         for (Vehicle car : cars) {
-            double vehiclePrice = car.getPrice();
-            System.out.println("Price of vehicle (VIN: " + car.getVinCode() + "): $" + vehiclePrice);
-            totalPriceOfAllVehicles += vehiclePrice;
+            totalPriceOfAllVehicles += car.getPrice();
         }
 
+        // Виводимо підсумкову ціну на консоль
         System.out.println("The total price of all vehicles: $" + totalPriceOfAllVehicles);
+
+        // Повертаємо загальну ціну
+        return totalPriceOfAllVehicles;
     }
 
     public void sort(List<Vehicle> cars) {
@@ -311,3 +313,6 @@ public class ListOfCommands
     }
 
 }
+
+
+
